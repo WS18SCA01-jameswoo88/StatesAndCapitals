@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController, UITextFieldDelegate {
     
-    let stateList: [(state: String, shortName: String, capital: String)] = [
+    var stateList: [(state: String, shortName: String, capital: String)] = [
         ("Alabama", "AL", "Montgomery"),
         ("Alaska", "AK", "Juneau"),
         ("Arizona", "AZ", "Pheonix"),
@@ -80,7 +80,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
         abbreviation.layer.borderWidth = 5
         abbreviation.layer.cornerRadius = 20
         abbreviation.layer.borderColor = UIColor.red.cgColor
+        abbreviation.layer.masksToBounds = true
         
+        stateList.shuffle()
     	updateResult()
     }
     
@@ -93,7 +95,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         return true;    //The text field should do its default behavior.
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField) { //why doesn't this work?
+    func textFieldDidEndEditing(_ textField: UITextField) {
         let yourAnswer: String = textField.text!.lowercased()
         let answer: String = stateList[currentStateIndex].capital.lowercased()
         print(yourAnswer)
@@ -108,17 +110,19 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func nextState(_ sender: Any) {
         currentStateIndex += 1
-        if currentStateIndex >= stateList.count {
+        /*if currentStateIndex >= stateList.count {
             currentStateIndex = 0
-        }
+        }*/
+        currentStateIndex %= stateList.count //same as line 112
         updateResult()
     }
     
     @IBAction func prevState(_ sender: Any) {
         currentStateIndex -= 1
-        if currentStateIndex <= 0 {
-            currentStateIndex = 49
-        }
+        if currentStateIndex < 0 {
+            currentStateIndex = stateList.count - 1
+        }//currentStateIndex %= stateList.count does not work with negative numbers
+
         updateResult()
         
     }

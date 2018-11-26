@@ -104,9 +104,7 @@
                                         <constraints>
                                             <constraint firstAttribute="width" constant="225" id="RO1-rK-zOe"/>
                                         </constraints>
-                                        <state key="normal" title="Show Answer">
-                                            <color key="titleColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
+                                        <state key="normal" title="Show Answer"/>
                                         <connections>
                                             <action selector="showAnswer:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LQ1-ay-D95"/>
                                         </connections>
